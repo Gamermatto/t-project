@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3 uid="uid://e22wnrsrvetq"]
+
+[ext_resource type="Script" uid="uid://duovoxkxgkna0" path="res://src/scripts/options_menu_settings.gd" id="1_ciwqe"]
+[ext_resource type="Script" uid="uid://tro22ttocj4e" path="res://src/scripts/volume_slider.gd" id="2_3ulxp"]
+
+[node name="Options_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ciwqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -124.0
+offset_right = -50.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.83832, 2.67747)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="master_label" type="Label" parent="MarginContainer/VBoxContainer/ColorRect2"]
+layout_mode = 2
+offset_top = -70.8069
+offset_right = 118.0
+offset_bottom = -47.8069
+size_flags_horizontal = 0
+text = "Master Volume"
+
+[node name="master" type="HSlider" parent="MarginContainer/VBoxContainer/ColorRect2"]
+layout_mode = 2
+offset_top = -33.8317
+offset_right = 118.0
+offset_bottom = -17.8317
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_3ulxp")
+bus_name = "Master"
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="music_label" type="Label" parent="MarginContainer/VBoxContainer/ColorRect"]
+layout_mode = 2
+offset_top = -9.0
+offset_right = 118.0
+offset_bottom = 14.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="music" type="HSlider" parent="MarginContainer/VBoxContainer/ColorRect"]
+layout_mode = 2
+offset_top = 20.589
+offset_right = 118.0
+offset_bottom = 36.589
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_3ulxp")
+bus_name = "Music"
+
+[node name="ColorRect3" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="sfx_label" type="Label" parent="MarginContainer/VBoxContainer/ColorRect3"]
+layout_mode = 2
+offset_top = 28.649
+offset_right = 118.0
+offset_bottom = 51.649
+text = "Sfx Volume"
+horizontal_alignment = 1
+
+[node name="sfx" type="HSlider" parent="MarginContainer/VBoxContainer/ColorRect3"]
+layout_mode = 2
+offset_top = 54.0461
+offset_right = 118.0
+offset_bottom = 70.0461
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_3ulxp")
+bus_name = "SFX"
+
+[node name="ColorRect4" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/ColorRect4"]
+layout_mode = 2
+offset_top = -125.614
+offset_right = 118.0
+offset_bottom = -94.6138
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ColorRect4/Back" to="." method="_on_back_pressed"]

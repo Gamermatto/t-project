@@ -1,0 +1,235 @@
+[gd_scene load_steps=9 format=3 uid="uid://bo5nk2keblynw"]
+
+[ext_resource type="Script" uid="uid://bc72c4gh008cb" path="res://src/scripts/pause_menu.gd" id="1_7t0dt"]
+[ext_resource type="Shader" uid="uid://bybanq4steryq" path="res://src/shaders/pause_menu.gdshader" id="1_rqu7g"]
+[ext_resource type="PackedScene" uid="uid://e22wnrsrvetq" path="res://src/scenes/MainMenu/pause_options_menu.tscn" id="3_sgl1w"]
+[ext_resource type="Script" uid="uid://duovoxkxgkna0" path="res://src/scripts/options_menu_settings.gd" id="4_4h238"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1rdf"]
+shader = ExtResource("1_rqu7g")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_i6mc1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i4ib2"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y1lsd"]
+_data = {
+&"RESET": SubResource("Animation_i6mc1"),
+&"blur": SubResource("Animation_i4ib2")
+}
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7t0dt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_d1rdf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -164.0
+offset_right = 153.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Resume" type="ColorRect" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer/Resume"]
+layout_mode = 2
+offset_left = 117.5
+offset_top = 50.0
+offset_right = 187.5
+offset_bottom = 81.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Resume"
+
+[node name="Restart" type="ColorRect" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer/Restart"]
+layout_mode = 2
+offset_left = 120.5
+offset_top = 110.0
+offset_right = 185.5
+offset_bottom = 141.0
+size_flags_horizontal = 4
+text = "Restart"
+
+[node name="Settings" type="ColorRect" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer/Settings"]
+layout_mode = 2
+offset_left = 117.5
+offset_top = 170.0
+offset_right = 187.5
+offset_bottom = 201.0
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="Quit" type="ColorRect" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer/Quit"]
+layout_mode = 2
+offset_left = 128.5
+offset_top = 230.0
+offset_right = 170.5
+offset_bottom = 261.0
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y1lsd")
+}
+
+[node name="Settings" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 761.0
+offset_top = 245.0
+offset_right = 1062.0
+offset_bottom = 574.0
+script = ExtResource("4_4h238")
+
+[node name="Options_menu" parent="Settings" instance=ExtResource("3_sgl1w")]
+visible = false
+layout_mode = 1
+script = null
+
+[node name="master_label" parent="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect2" index="0"]
+offset_left = 6.0
+offset_top = -66.0
+offset_right = 113.0
+offset_bottom = -43.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="master" parent="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect2" index="1"]
+offset_left = 23.0
+offset_top = -50.0
+offset_right = 96.0
+offset_bottom = -34.0
+
+[node name="music_label" parent="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect" index="0"]
+offset_left = 5.0
+offset_top = -38.0
+offset_right = 114.0
+offset_bottom = -15.0
+theme_override_font_sizes/font_size = 10
+vertical_alignment = 1
+
+[node name="music" parent="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect" index="1"]
+offset_left = 26.0
+offset_top = -22.0
+offset_right = 93.0
+offset_bottom = -6.0
+
+[node name="sfx_label" parent="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect3" index="0"]
+offset_left = 5.0
+offset_top = -10.0
+offset_right = 113.0
+offset_bottom = 13.0
+theme_override_font_sizes/font_size = 10
+vertical_alignment = 1
+
+[node name="sfx" parent="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect3" index="1"]
+offset_left = 30.0
+offset_top = 7.0
+offset_right = 86.0
+offset_bottom = 23.0
+
+[node name="Back" parent="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect4" index="0"]
+offset_left = 22.0201
+offset_top = -111.114
+offset_right = 98.0201
+offset_bottom = -80.1135
+scale = Vector2(0.996245, 1)
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Settings/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Settings/Options_menu/MarginContainer/VBoxContainer/ColorRect4/Back" to="Settings" method="_on_back_pressed"]
+
+[editable path="Settings/Options_menu"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcpo1gqrn8vut"]
+
+[ext_resource type="Texture2D" uid="uid://borvk6222fbjl" path="res://src/texture/Square.png" id="1_g4s8f"]
+[ext_resource type="Script" uid="uid://dkskcy34euaaj" path="res://src/scripts/player.gd" id="2_yefio"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebpj8"]
+size = Vector2(16, 16)
+
+[node name="Player" type="Sprite2D"]
+modulate = Color(0.001, 0.28, 0.907, 1)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_g4s8f")
+script = ExtResource("2_yefio")
+
+[node name="Reload_speed" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Power_up_cool_down" type="Timer" parent="." groups=["Player"]]
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2(-5.72204e-07, -2.86102e-07)
+shape = SubResource("RectangleShape2D_ebpj8")
+
+[connection signal="timeout" from="Reload_speed" to="." method="_on_reload_speed_timeout"]
+[connection signal="timeout" from="Power_up_cool_down" to="." method="_on_power_up_cool_down_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

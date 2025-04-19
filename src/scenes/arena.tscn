@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://b5wcnmhy8xx0o"]
+
+[ext_resource type="Script" uid="uid://bp6xlpykp02n0" path="res://src/scripts/arena.gd" id="1_vuebv"]
+[ext_resource type="PackedScene" uid="uid://dcpo1gqrn8vut" path="res://src/scenes/Player&Blood/player.tscn" id="2_aadmv"]
+[ext_resource type="PackedScene" uid="uid://c7fckguol77t7" path="res://src/scenes/Enemies/enemy_1.tscn" id="2_hr5vn"]
+[ext_resource type="FontFile" uid="uid://04ununq1pjme" path="res://src/fonts/Font.ttf" id="3_4ir44"]
+[ext_resource type="PackedScene" uid="uid://bk01pk35u2bl0" path="res://src/scenes/Enemies/enemy_2.tscn" id="3_5aswh"]
+[ext_resource type="Script" uid="uid://dvesdgqvvh1ug" path="res://src/scripts/score.gd" id="4_avtio"]
+[ext_resource type="PackedScene" uid="uid://jemm8lheu21c" path="res://src/scenes/PowerUps/power_up_reload.tscn" id="4_lg6vl"]
+[ext_resource type="Script" uid="uid://ibd7d36oufn" path="res://src/scripts/camera_2d.gd" id="5_br5e3"]
+[ext_resource type="PackedScene" uid="uid://cxfshu2m6jmk1" path="res://src/scenes/PowerUps/power_up_damage.tscn" id="5_el5wg"]
+[ext_resource type="Script" uid="uid://ckp0anvkpk1ts" path="res://src/scripts/highscore.gd" id="5_hd7vu"]
+[ext_resource type="PackedScene" uid="uid://ewc1062rn7ib" path="res://color_rect.tscn" id="11_hsudc"]
+[ext_resource type="PackedScene" uid="uid://bo5nk2keblynw" path="res://src/scenes/MainMenu/pause_menu.tscn" id="12_2833y"]
+[ext_resource type="PackedScene" uid="uid://cmjj2vs8u8gwi" path="res://touch_controls.tscn" id="13_pse2e"]
+[ext_resource type="Texture2D" uid="uid://iwnkcb0mdfao" path="res://icon.svg" id="14_2fop3"]
+
+[sub_resource type="Environment" id="Environment_wt1e3"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.15
+glow_blend_mode = 0
+fog_light_color = Color(0, 0, 0, 1)
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_vuebv")
+enemies = Array[PackedScene]([ExtResource("2_hr5vn"), ExtResource("3_5aswh")])
+power_ups = Array[PackedScene]([ExtResource("4_lg6vl"), ExtResource("5_el5wg")])
+
+[node name="Player" parent="." instance=ExtResource("2_aadmv")]
+position = Vector2(576, 320)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wt1e3")
+
+[node name="Enemy_spawn_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Difficulty_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Power_up_spawn_timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="UI" type="Node2D" parent="."]
+z_index = 20
+
+[node name="Control" type="Control" parent="UI"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Score" type="Label" parent="UI/Control"]
+layout_mode = 0
+offset_right = 2304.0
+offset_bottom = 138.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_4ir44")
+theme_override_font_sizes/font_size = 128
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_avtio")
+
+[node name="Highscore" type="Label" parent="UI/Control"]
+layout_mode = 0
+offset_top = 595.0
+offset_right = 2304.0
+offset_bottom = 703.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_4ir44")
+theme_override_font_sizes/font_size = 100
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_hd7vu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("5_br5e3")
+
+[node name="Screen_shake_time" type="Timer" parent="Camera2D"]
+one_shot = true
+
+[node name="ColorRect" parent="." instance=ExtResource("11_hsudc")]
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 1280.0
+offset_bottom = 776.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("12_2833y")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TouchControls" parent="Control" instance=ExtResource("13_pse2e")]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+modulate = Color(1, 1, 1, 0.199)
+position = Vector2(992, 494)
+scale = Vector2(0.914063, 0.71875)
+texture_normal = ExtResource("14_2fop3")
+action = "left_mouse_click"
+
+[connection signal="timeout" from="Enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
+[connection signal="timeout" from="Power_up_spawn_timer" to="." method="_on_power_up_spawn_timer_timeout"]
+[connection signal="timeout" from="Camera2D/Screen_shake_time" to="Camera2D" method="_on_screen_shake_time_timeout"]

@@ -1,0 +1,117 @@
+[gd_scene load_steps=8 format=3 uid="uid://s7dsbjibq8f6"]
+
+[ext_resource type="Script" uid="uid://ciiyi1beukdgs" path="res://src/scripts/lose_menu.gd" id="1_jmyj1"]
+[ext_resource type="StyleBox" uid="uid://btyjmwd5h621c" path="res://src/fonts/button_menu.tres" id="1_r71sn"]
+[ext_resource type="StyleBox" uid="uid://dahsorgtnihws" path="res://src/fonts/button_menu(normal).tres" id="2_16nxe"]
+[ext_resource type="Script" uid="uid://dvesdgqvvh1ug" path="res://src/scripts/score.gd" id="3_0qgl4"]
+[ext_resource type="Script" uid="uid://ckp0anvkpk1ts" path="res://src/scripts/highscore.gd" id="4_sx7dr"]
+
+[sub_resource type="Theme" id="Theme_1sswy"]
+Button/styles/disabled = ExtResource("1_r71sn")
+Button/styles/focus = ExtResource("1_r71sn")
+Button/styles/hover = ExtResource("1_r71sn")
+Button/styles/normal = ExtResource("2_16nxe")
+Button/styles/pressed = ExtResource("1_r71sn")
+
+[sub_resource type="Theme" id="Theme_e8wmv"]
+Button/styles/disabled = ExtResource("1_r71sn")
+Button/styles/focus = ExtResource("1_r71sn")
+Button/styles/hover = ExtResource("1_r71sn")
+Button/styles/normal = ExtResource("2_16nxe")
+Button/styles/pressed = ExtResource("1_r71sn")
+
+[node name="Lose_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jmyj1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="You died" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "You died"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Retry" type="Button" parent="MarginContainer/VBoxContainer/ColorRect"]
+layout_mode = 2
+offset_left = 480.0
+offset_top = 179.0
+offset_right = 656.0
+offset_bottom = 243.0
+theme = SubResource("Theme_1sswy")
+theme_override_font_sizes/font_size = 20
+text = "Retry"
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Main Menu" type="Button" parent="MarginContainer/VBoxContainer/ColorRect2"]
+layout_mode = 2
+offset_left = 480.0
+offset_top = 303.0
+offset_right = 656.0
+offset_bottom = 367.0
+theme = SubResource("Theme_e8wmv")
+theme_override_font_sizes/font_size = 20
+text = "Main Menu"
+
+[node name="ColorRect3" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="MarginContainer/VBoxContainer/ColorRect3"]
+layout_mode = 2
+offset_left = 534.0
+offset_top = -10.0
+offset_right = 563.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+script = ExtResource("3_0qgl4")
+
+[node name="Score2" type="Label" parent="MarginContainer/VBoxContainer/ColorRect3"]
+layout_mode = 2
+offset_left = 384.0
+offset_top = -12.0
+offset_right = 531.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 50
+text = "Score:"
+
+[node name="Highscore" type="Label" parent="MarginContainer/VBoxContainer/ColorRect3"]
+layout_mode = 2
+offset_left = 592.0
+offset_top = 71.0
+offset_right = 621.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 40
+text = "0"
+script = ExtResource("4_sx7dr")
+
+[node name="Highscore2" type="Label" parent="MarginContainer/VBoxContainer/ColorRect3"]
+layout_mode = 2
+offset_left = 384.0
+offset_top = 68.0
+offset_right = 588.0
+offset_bottom = 137.0
+theme_override_font_sizes/font_size = 40
+text = "Highscore:"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ColorRect/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ColorRect2/Main Menu" to="." method="_on_pressed"]

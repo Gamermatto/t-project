@@ -1,0 +1,231 @@
+[gd_scene load_steps=18 format=3 uid="uid://dc1ntashb57mc"]
+
+[ext_resource type="Script" uid="uid://bxx4dwgx0koot" path="res://src/scripts/menu.gd" id="1_6km8s"]
+[ext_resource type="StyleBox" uid="uid://btyjmwd5h621c" path="res://src/fonts/button_menu.tres" id="2_hwlnd"]
+[ext_resource type="FontFile" uid="uid://04ununq1pjme" path="res://src/fonts/Font.ttf" id="2_qiwcb"]
+[ext_resource type="PackedScene" uid="uid://dcpo1gqrn8vut" path="res://src/scenes/Player&Blood/player.tscn" id="4_p63gi"]
+[ext_resource type="PackedScene" uid="uid://mdwna7xut58s" path="res://src/scenes/Player&Blood/bullet.tscn" id="5_clvwr"]
+[ext_resource type="PackedScene" uid="uid://egx67npqnmfs" path="res://src/scenes/Enemies/enemy.tscn" id="6_4qwxr"]
+[ext_resource type="PackedScene" uid="uid://ewc1062rn7ib" path="res://color_rect.tscn" id="7_2p347"]
+[ext_resource type="PackedScene" uid="uid://ny2oxqn4xhle" path="res://src/scenes/Player&Blood/blood_particles.tscn" id="8_a4qg3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7plh"]
+bg_color = Color(5.77569e-07, 0.536182, 0.655045, 1)
+border_width_bottom = 5
+border_color = Color(5.29438e-07, 0.401026, 0.492715, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.560784)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Theme" id="Theme_0s3g7"]
+default_font = ExtResource("2_qiwcb")
+default_font_size = 21
+Button/styles/disabled = ExtResource("2_hwlnd")
+Button/styles/focus = ExtResource("2_hwlnd")
+Button/styles/hover = SubResource("StyleBoxFlat_m7plh")
+Button/styles/normal = ExtResource("2_hwlnd")
+Button/styles/pressed = ExtResource("2_hwlnd")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2ly0"]
+bg_color = Color(0, 0.537255, 0.654902, 1)
+border_width_bottom = 5
+border_color = Color(0, 0.4, 0.494118, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.560784)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ej86"]
+bg_color = Color(0, 0.666667, 0.811765, 1)
+border_width_bottom = 5
+border_color = Color(0, 0.203922, 0.254902, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.556863)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Theme" id="Theme_52ww5"]
+default_font = ExtResource("2_qiwcb")
+default_font_size = 21
+Button/styles/disabled = ExtResource("2_hwlnd")
+Button/styles/focus = ExtResource("2_hwlnd")
+Button/styles/hover = SubResource("StyleBoxFlat_q2ly0")
+Button/styles/normal = SubResource("StyleBoxFlat_5ej86")
+Button/styles/pressed = ExtResource("2_hwlnd")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwd7p"]
+bg_color = Color(0, 0.537255, 0.654902, 1)
+border_width_bottom = 5
+border_color = Color(0, 0.4, 0.494118, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.560784)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3opx"]
+bg_color = Color(0, 0.666667, 0.811765, 1)
+border_width_bottom = 5
+border_color = Color(0, 0.203922, 0.254902, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.556863)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Theme" id="Theme_8iki2"]
+default_font = ExtResource("2_qiwcb")
+default_font_size = 21
+Button/styles/disabled = ExtResource("2_hwlnd")
+Button/styles/focus = ExtResource("2_hwlnd")
+Button/styles/hover = SubResource("StyleBoxFlat_nwd7p")
+Button/styles/normal = SubResource("StyleBoxFlat_a3opx")
+Button/styles/pressed = ExtResource("2_hwlnd")
+
+[sub_resource type="Environment" id="Environment_w57i4"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.15
+glow_blend_mode = 0
+fog_light_color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6km8s")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.0
+offset_top = -161.0
+offset_right = -106.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4.69571, 3.6306)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_0s3g7")
+text = "Play"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_52ww5")
+text = "Options"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_8iki2")
+text = "Exit"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w57i4")
+
+[node name="ColorRect" parent="." instance=ExtResource("7_2p347")]
+z_index = -60
+mouse_filter = 2
+
+[node name="ScreenEffect" type="Node2D" parent="."]
+
+[node name="Player" parent="ScreenEffect" instance=ExtResource("4_p63gi")]
+position = Vector2(109, 98)
+script = null
+
+[node name="Bullet" parent="ScreenEffect" instance=ExtResource("5_clvwr")]
+position = Vector2(832, 446)
+script = null
+
+[node name="Bullet2" parent="ScreenEffect" instance=ExtResource("5_clvwr")]
+position = Vector2(379, 297)
+script = null
+
+[node name="Bullet3" parent="ScreenEffect" instance=ExtResource("5_clvwr")]
+position = Vector2(749, 405)
+script = null
+
+[node name="Bullet4" parent="ScreenEffect" instance=ExtResource("5_clvwr")]
+position = Vector2(282, 244)
+script = null
+
+[node name="Bullet6" parent="ScreenEffect" instance=ExtResource("5_clvwr")]
+position = Vector2(288, 465)
+script = null
+
+[node name="Bullet7" parent="ScreenEffect" instance=ExtResource("5_clvwr")]
+position = Vector2(217, 192)
+script = null
+
+[node name="Bullet5" parent="ScreenEffect" instance=ExtResource("5_clvwr")]
+position = Vector2(158, 133)
+script = null
+
+[node name="Enemy_base" parent="ScreenEffect" instance=ExtResource("6_4qwxr")]
+position = Vector2(905, 476)
+script = null
+
+[node name="Enemy_blood" parent="ScreenEffect" instance=ExtResource("8_a4qg3")]
+modulate = Color(0.454902, 0, 0.0156863, 1)
+position = Vector2(872, 172)
+rotation = -0.434264
+script = null
+
+[node name="Enemy_blood2" parent="ScreenEffect" instance=ExtResource("8_a4qg3")]
+modulate = Color(0.454902, 0, 0.0156863, 1)
+position = Vector2(305, 433)
+rotation = 2.63832
+script = null
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
